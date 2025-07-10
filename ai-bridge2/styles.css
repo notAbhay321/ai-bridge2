@@ -290,6 +290,55 @@ body {
     text-decoration: none;
 }
 
+/* Password input container with eye icon */
+.password-input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-input-container input {
+    width: 100%;
+    padding-right: 50px;
+}
+
+.password-toggle-btn {
+    position: absolute;
+    right: 12px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+    z-index: 1;
+}
+
+.password-toggle-btn:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.password-toggle-btn:focus {
+    outline: none;
+    background-color: rgba(102, 126, 234, 0.1);
+}
+
+.eye-icon,
+.eye-off-icon {
+    width: 20px;
+    height: 20px;
+    color: #666;
+    transition: color 0.2s ease;
+}
+
+.password-toggle-btn:hover .eye-icon,
+.password-toggle-btn:hover .eye-off-icon {
+    color: #667eea;
+}
+
 .link-btn {
     background: none;
     border: none;

@@ -59,26 +59,28 @@ function setupEventListeners() {
         forgotPasswordBtn.addEventListener('click', handleForgotPassword);
     }
 
-    // Password visibility checkboxes
-    const showLoginPassword = document.getElementById('show-login-password');
+    // Password visibility toggle buttons
+    const toggleLoginPassword = document.getElementById('toggle-login-password');
     const loginPassword = document.getElementById('login-password');
-    if (showLoginPassword && loginPassword) {
-        showLoginPassword.addEventListener('change', function() {
-            loginPassword.type = this.checked ? 'text' : 'password';
+    if (toggleLoginPassword && loginPassword) {
+        toggleLoginPassword.addEventListener('click', function() {
+            togglePasswordVisibility(loginPassword, toggleLoginPassword);
         });
     }
 
-    const showSignupPassword = document.getElementById('show-signup-password');
-    if (showSignupPassword) {
-        showSignupPassword.addEventListener('change', function() {
-            togglePasswordWithCheckbox('signup-password', this.checked);
+    const toggleSignupPassword = document.getElementById('toggle-signup-password');
+    const signupPassword = document.getElementById('signup-password');
+    if (toggleSignupPassword && signupPassword) {
+        toggleSignupPassword.addEventListener('click', function() {
+            togglePasswordVisibility(signupPassword, toggleSignupPassword);
         });
     }
 
-    const showSignupConfirmPassword = document.getElementById('show-signup-confirm-password');
-    if (showSignupConfirmPassword) {
-        showSignupConfirmPassword.addEventListener('change', function() {
-            togglePasswordWithCheckbox('signup-confirm-password', this.checked);
+    const toggleSignupConfirmPassword = document.getElementById('toggle-signup-confirm-password');
+    const signupConfirmPassword = document.getElementById('signup-confirm-password');
+    if (toggleSignupConfirmPassword && signupConfirmPassword) {
+        toggleSignupConfirmPassword.addEventListener('click', function() {
+            togglePasswordVisibility(signupConfirmPassword, toggleSignupConfirmPassword);
         });
     }
 
@@ -100,8 +102,6 @@ function setupEventListeners() {
     });
     
     // Real-time validation for signup form
-    const signupPassword = document.getElementById('signup-password');
-    const signupConfirmPassword = document.getElementById('signup-confirm-password');
     const signupName = document.getElementById('signup-name');
     const signupEmail = document.getElementById('signup-email');
     const loginEmail = document.getElementById('login-email');
@@ -511,13 +511,17 @@ async function handleForgotPassword() {
     }
 }
 
-// Toggle password visibility with checkbox
-function togglePasswordWithCheckbox(passwordFieldId, isChecked) {
-    const passwordField = document.getElementById(passwordFieldId);
-    if (!passwordField) {
-        return;
+// Toggle password visibility with button
+function togglePasswordVisibility(passwordField, toggleButton) {
+    if (passwordField.type === 'password') {
+        passwordField.type = 'text';
+        toggleButton.querySelector('.eye-icon').classList.add('hidden');
+        toggleButton.querySelector('.eye-off-icon').classList.remove('hidden');
+    } else {
+        passwordField.type = 'password';
+        toggleButton.querySelector('.eye-icon').classList.remove('hidden');
+        toggleButton.querySelector('.eye-off-icon').classList.add('hidden');
     }
-    passwordField.type = isChecked ? 'text' : 'password';
 }
 
 // Show authentication panel
